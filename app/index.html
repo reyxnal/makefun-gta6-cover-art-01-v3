@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Neon Shores turns any photo and caption into GTA 6-style multi-panel cover art with a Vice City neon grade, offline in the browser, exported as a PNG.">
+<title>Neon Shores — GTA 6 Style Cover Maker</title>
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">N</span>
+    <div>
+      <h1>Neon Shores</h1>
+      <p class="tagline">Turn any photo into Vice City nights cover art — offline, in your browser.</p>
+    </div>
+  </div>
+  <div class="top-actions">
+    <button id="sampleBtn" type="button" class="btn ghost">Load sample photos</button>
+    <button id="exportBtn" type="button" class="btn primary">Export PNG</button>
+  </div>
+</header>
+
+<main class="layout">
+  <section class="stage-wrap" aria-label="Cover preview">
+    <div class="stage-toolbar">
+      <span id="sizeLabel" class="size-label">1080 × 1080 · Square post</span>
+      <span id="renderState" class="render-state" role="status">Ready</span>
+    </div>
+    <canvas id="cover" width="1080" height="1080" aria-label="Cover art preview"></canvas>
+    <p class="hint">Click a panel to select it, then drag on the canvas to reposition that photo. Scroll to zoom it.</p>
+  </section>
+
+  <aside class="panel" aria-label="Cover controls">
+    <section class="group">
+      <h2>1 · Photos</h2>
+      <p class="group-note">One photo can fill every panel, or give each panel its own photo.</p>
+      <label class="field">Photo for selected panel
+        <input id="photoInput" type="file" accept="image/*">
+      </label>
+      <div class="row">
+        <button id="fillAllBtn" type="button" class="btn small">Use one photo everywhere</button>
+        <button id="clearBtn" type="button" class="btn small ghost">Clear photos</button>
+      </div>
+      <label class="field">Selected panel
+        <select id="panelSelect">
+          <option value="0">Hero — big panel</option>
+          <option value="1">Panel 2 — upper right</option>
+          <option value="2">Panel 3 — lower right</option>
+          <option value="3">Panel 4 — bottom strip</option>
+        </select>
+      </label>
+      <div class="sliders">
+        <label>Zoom <input id="zoomSlider" type="range" min="100" max="260" value="120"> <output id="zoomOut">1.20×</output></label>
+        <label>Pan X <input id="panXSlider" type="range" min="-50" max="50" value="0"> <output id="panXOut">0</output></label>
+        <label>Pan Y <input id="panYSlider" type="range" min="-50" max="50" value="0"> <output id="panYOut">0</output></label>
+      </div>
+    </section>
+
+    <section class="group">
+      <h2>2 · Words</h2>
+      <label class="field">Title
+        <input id="titleInput" type="text" maxlength="28" value="NEON SHORES">
+      </label>
+      <label class="field">Subtitle
+        <input id="subtitleInput" type="text" maxlength="48" value="A Vice City nights story">
+      </label>
+      <label class="field">Kicker
+        <input id="kickerInput" type="text" maxlength="24" value="WELCOME TO THE SHORE">
+      </label>
+    </section>
+
+    <section class="group">
+      <h2>3 · Look</h2>
+      <label class="field">Neon grade
+        <select id="gradeSelect">
+          <option value="neon">Neon Nights — magenta / cyan</option>
+          <option value="sunset">Sunset Vice — amber / violet</option>
+          <option value="noir">Palm Noir — teal shadows</option>
+          <option value="dawn">Pastel Dawn — soft pink / peach</option>
+        </select>
+      </label>
+      <label class="field">Layout
+        <select id="layoutSelect">
+          <option value="nights">Nights — hero + two + strip</option>
+          <option value="triptych">Triptych — three tall panels</option>
+          <option value="duo">Duo — two panels + banner</option>
+        </select>
+      </label>
+      <label class="field">Post size
+        <select id="sizeSelect">
+          <option value="1080x1080">1080 × 1080 — square</option>
+          <option value="1080x1350">1080 × 1350 — portrait</option>
+          <option value="1920x1080">1920 × 1080 — landscape</option>
+        </select>
+      </label>
+      <div class="sliders">
+        <label>Glow <input id="glowSlider" type="range" min="0" max="100" value="70"> <output id="glowOut">70</output></label>
+        <label>Film grain <input id="grainSlider" type="range" min="0" max="100" value="45"> <output id="grainOut">45</output></label>
+      </div>
+    </section>
+
+    <p id="status" class="status" role="status"></p>
+  </aside>
+</main>
+
+<footer class="foot">
+  <p>100% offline — your photos never leave this browser. No Rockstar artwork, logos or fonts are used; all lettering is drawn from system fonts and every sample scene is generated in code.</p>
+</footer>
+
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
